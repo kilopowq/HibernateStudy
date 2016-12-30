@@ -22,11 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="HibernateStudy" />
+        <module name="TryShop" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="HibernateStudy" target="1.5" />
+      <module name="TryShop" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
