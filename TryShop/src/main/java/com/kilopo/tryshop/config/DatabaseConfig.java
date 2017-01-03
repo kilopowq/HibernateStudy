@@ -20,7 +20,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories("com.kilopo.tryshop.repositories")
+@EnableJpaRepositories("com.kilopo.tryshop.repository")
 @EnableTransactionManagement
 @PropertySource("classpath:db.properties")
 @Component("com.kilopo.tryshop")
