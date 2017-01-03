@@ -1,32 +1,40 @@
 package com.kilopo.tryshop.controller;
 
 import com.kilopo.tryshop.entity.Product;
-import com.kilopo.tryshop.repository.ProductRepository;
+import com.kilopo.tryshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
-@RequestMapping("/reminder")
 public class ProductsController {
 
-    @RequestMapping(value="/get", method = RequestMethod.GET)
+    @Autowired
+    private ProductService service;
+
+    @RequestMapping(value="/products", method = RequestMethod.GET)
     @ResponseBody
-    public Product getReminder(){
-        return createMockProduct();
+    public List<Product> getAllProducts(){
+        return service.getAll();
     }
 
-    private Product createMockProduct() {
-        Product product = new Product();
-        product.setId(1);
-        product.setName("dffds");
-        product.setInfo("dfdsfdsfsdfdsvrwefdsc fwsdc er ");
-        product.setPrice(14.88);
-        product.setPhoto("dfsdfdsfds");
-        return product;
+    @RequestMapping(value="/products/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Product getProduct(@PathVariable("id") long productId){
+        return service.getById(productId);
+    }
+
+    @RequestMapping(value="/products", method = RequestMethod.POST)
+    @ResponseBody
+    public Product saveProduct(@RequestBody Product product){
+        return service.save(product);
+    }
+
+    @RequestMapping(value="/products/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteProduct(@PathVariable("id") long productId){
+        service.delete(productId);
     }
 }
