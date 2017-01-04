@@ -27,6 +27,8 @@ public class User extends Person {
     @JoinColumn(name = "admin_id")
     private Admin blockedBy;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<Comment> comments = new HashSet<Comment>();
 
     public User() {
     }
@@ -70,5 +72,13 @@ public class User extends Person {
 
     public void setBlockedBy(Admin blockedBy) {
         this.blockedBy = blockedBy;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }

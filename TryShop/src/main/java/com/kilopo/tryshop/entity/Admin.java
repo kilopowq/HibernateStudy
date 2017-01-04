@@ -14,6 +14,9 @@ public class Admin extends Person {
     @OneToMany(mappedBy = "blockedBy", fetch = FetchType.LAZY)
     private Set<User> blockedUsers = new HashSet<User>();
 
+    @OneToMany(mappedBy = "blockedBy", fetch = FetchType.LAZY)
+    private Set<Comment> comments = new HashSet<Comment>();
+
     public Admin() {
     }
 
@@ -23,5 +26,13 @@ public class Admin extends Person {
 
     public void setBlockedUsers(Set<User> blockedUsers) {
         this.blockedUsers = blockedUsers;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }

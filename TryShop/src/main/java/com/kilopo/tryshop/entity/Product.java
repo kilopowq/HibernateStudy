@@ -46,6 +46,9 @@ public class Product extends BaseModel {
             inverseJoinColumns = {@JoinColumn(name = "order_id")})
     private Set<Order> orders = new HashSet<Order>();
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private Set<Comment> comments = new HashSet<Comment>();
+
     public Product() {
     }
 
@@ -127,5 +130,13 @@ public class Product extends BaseModel {
 
     public void setNum(int num) {
         this.num = num;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }
