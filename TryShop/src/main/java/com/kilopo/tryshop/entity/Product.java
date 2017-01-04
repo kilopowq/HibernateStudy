@@ -1,22 +1,17 @@
 package com.kilopo.tryshop.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product extends BaseModel {
 
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    private long id;
-
-    @Column(name = "name")
+    @Column(name = "name", length = 50, nullable = false)
     private String name;
 
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private double price;
 
     @Column(name = "info")
@@ -25,15 +20,33 @@ public class Product {
     @Column(name = "photo")
     private String photo;
 
-    @Column(name = "isPresent")
-    private boolean isPresent;
+    @Column(name = "number", nullable = false)
+    private int num;
 
-    public long getId() {
-        return id;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "producers_id")
+    private Producer producer;
 
-    public void setId(long id) {
-        this.id = id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @Column(name = "garanty")
+    private String garanty;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "product_basket",
+            joinColumns = {@JoinColumn(name = "product_id")},
+            inverseJoinColumns = {@JoinColumn(name = "basket_id")})
+    private Set<Basket> baskets = new HashSet<Basket>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "product_order",
+            joinColumns = {@JoinColumn(name = "product_id")},
+            inverseJoinColumns = {@JoinColumn(name = "order_id")})
+    private Set<Order> orders = new HashSet<Order>();
+
+    public Product() {
     }
 
     public String getName() {
@@ -68,14 +81,51 @@ public class Product {
         this.photo = photo;
     }
 
-    public boolean isPresent() {
-        return isPresent;
+    public Producer getProducer() {
+        return producer;
     }
 
-    public void setPresent(boolean present) {
-        isPresent = present;
+    public void setProducer(Producer producer) {
+        this.producer = producer;
     }
 
-    public Product() {
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public String getGaranty() {
+        return garanty;
+    }
+
+    public void setGaranty(String garanty) {
+        this.garanty = garanty;
+    }
+
+    public Set<Basket> getBaskets() {
+        return baskets;
+    }
+
+    public void setBaskets(Set<Basket> baskets) {
+        this.baskets = baskets;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 }

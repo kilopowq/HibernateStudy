@@ -37,8 +37,6 @@ public class DatabaseConfig {
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         em.setJpaProperties(getHibernateProperties());
 
-
-
         return em;
     }
 
