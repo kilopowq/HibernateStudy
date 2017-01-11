@@ -40,7 +40,6 @@ public class DatabaseConfig {
         return em;
     }
 
-
     @Bean
     public DataSource dataSource() {
         BasicDataSource ds = new BasicDataSource();

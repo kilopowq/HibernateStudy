@@ -58,14 +58,6 @@ public class User extends Person {
         this.baskets = baskets;
     }
 
-    public Basket getBasket() {
-        return baskets;
-    }
-
-    public void setBasket(Basket basket) {
-        this.baskets = basket;
-    }
-
     public Admin getBlockedBy() {
         return blockedBy;
     }
