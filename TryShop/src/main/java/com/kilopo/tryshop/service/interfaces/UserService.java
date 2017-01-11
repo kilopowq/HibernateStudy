@@ -6,11 +6,12 @@ import java.util.List;
 
 public interface UserService {
 
+    User getUser(String login);
+
     List<User> getAllUser();
     boolean blockUser(long id);
     boolean deleteUser(long id);
     boolean register(User user);
-    void login();
+    User login(String login);
     User getUserById(long id);
-
 }

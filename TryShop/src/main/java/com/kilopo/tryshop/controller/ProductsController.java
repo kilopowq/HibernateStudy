@@ -3,8 +3,6 @@ package com.kilopo.tryshop.controller;
 import com.kilopo.tryshop.entity.Basket;
 import com.kilopo.tryshop.entity.Product;
 import com.kilopo.tryshop.entity.User;
-import com.kilopo.tryshop.service.interfaces.CategoryService;
-import com.kilopo.tryshop.service.interfaces.ProducerService;
 import com.kilopo.tryshop.service.interfaces.ProductService;
 import com.kilopo.tryshop.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,7 @@ import java.util.List;
 
 
 @RestController
+@RequestMapping("/products")
 public class ProductsController {
 
     @Autowired
@@ -64,7 +63,7 @@ public class ProductsController {
         user.setBaskets(new Basket());
 
         userService.register(user);
-        return "" + userService.getUserById(1).getBaskets().getId();
+        return userService.getUserById(1).getName();
     }
 
 }

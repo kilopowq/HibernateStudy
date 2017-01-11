@@ -1,6 +1,5 @@
 package com.kilopo.tryshop.service;
 
-import com.kilopo.tryshop.entity.Basket;
 import com.kilopo.tryshop.entity.User;
 import com.kilopo.tryshop.repository.BasketRepository;
 import com.kilopo.tryshop.repository.StatusRepository;
@@ -9,11 +8,10 @@ import com.kilopo.tryshop.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Entity;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
@@ -23,6 +21,14 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     StatusRepository statusRepository;
+
+    public User getUser(String login) {
+        User user = new User();
+        user.setLogin(login);
+        user.setPassword("7110eda4d09e062aa5e4a390b0a572ac0d2c0220");
+
+        return user;
+    }
 
     public List<User> getAllUser() {
         return userRepository.findAll();
@@ -49,7 +55,12 @@ public class UserServiceImpl implements UserService{
         return true;
     }
 
-    public void login() {
-
+    public User login(String login) {
+        for(User us : userRepository.findAll()){
+            if (us.getLogin().equals(login)) return us;
+        }
+        return null;
     }
+
+
 }
